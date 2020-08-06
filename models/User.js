@@ -24,9 +24,6 @@ const userSchema = mongoose.Schema({
     token: {
         type : String
     },
-    token: {
-        type : String
-    },
     tokenExp : {
         type : Number
     }
@@ -39,16 +36,16 @@ userSchema.pre('save', function( next ) {
     if(user.isModified('password')){
 
         bcrypt.genSalt(saltRounds,function(err, salt){
-            if(err) return next(err)
+            if(err) return next(err);
 
             bcrypt.hash(user.password, salt, function(err, hash){
-                if(err) return next(err)
-                user.password = hash
-                next()
+                if(err) return next(err);
+                user.password = hash;
+                next();
             })
         })
     } else {
-        next()
+        next();
     }
 })
 
@@ -71,7 +68,7 @@ userSchema.methods.generateToken = function(cb) {
     // 'secretToekn' -> user./id
     user.token = token
     user.save(function(err,user){
-        if(err) return cb(err)
+        if(err) return cb(err);
         cb(null,user)
     })
 }

@@ -4,7 +4,7 @@ const port = 5000
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const config = require('./config/key')
+const config = require('./config/key');
 
 const { User } = require("./models/User");
 
@@ -15,14 +15,15 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 mongoose.connect(config.mongoURI, {
-    useNewUrlParser : true,
+    useNewUrlParser: true,
     useUnifiedTopology : true,
     useCreateIndex : true,
     useFindAndModify: false
+
 }).then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
 
 
